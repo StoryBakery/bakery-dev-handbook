@@ -24,7 +24,7 @@ videKit 컴포넌트는 `vide` 기반 UI 레이어를 일관된 패턴으로 구
   ```
 
 
-- Context, 다른 컴포넌트, 유틸리티는 블록을 나눠 require 하고, `code-style.md` 의 순서를 따릅니다.
+- Context, 다른 컴포넌트, 유틸리티는 블록을 나눠 require 하고, [require-style](../../scripting/require-style.md) 의 순서를 따릅니다.
 
 ## Props 정의
 

@@ -5,7 +5,7 @@ sidebar_label: Vide Overview
 
 # Vide Overview
 
-Vide 런타임을 사용할 때의 최소 규칙을 정리합니다. 호출 규칙은 [code-style](../scripting/code-style.md)의 “Vide 호출 스타일”을 그대로 따르며, videKit 컴포넌트에 특화된 구조는 [vide-kit](../scripting/vide-kit.md)를 참고하세요. 스토리 작성은 [vide-story-modules](./story-modules.md)를 참조합니다.
+Vide 런타임을 사용할 때의 최소 규칙을 정리합니다. 호출 규칙은 [vide-kit](./vide-kit.md)와 [formatting-style](../../scripting/formatting-style.md)의 지침을 그대로 따르며, videKit 컴포넌트에 특화된 구조는 [vide-kit](./vide-kit.md)를 참고하세요. 스토리 작성은 [vide-story-modules](./story-modules.md)를 참조합니다.
 
 
 ## 불러오기와 별칭
@@ -19,7 +19,7 @@ local action = vide.action
 local cleanup = vide.cleanup
 ```
 
-- 외부 패키지 alias, require 순서는 [require-style](../scripting/require-style.md)를 따릅니다.
+- 외부 패키지 alias, require 순서는 [require-style](../../scripting/require-style.md)를 따릅니다.
 
 
 ## 엘리먼트 생성 규칙

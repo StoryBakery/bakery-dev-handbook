@@ -5,7 +5,7 @@ sidebar_label: Story Modules
 
 # Story Modules
 
-이 문서는 Vide 기반 스토리(Story) 모듈 작성 규칙을 설명합니다. 스토리는 UI 컴포넌트의 샌드박스 렌더링과 상태 조작(Controls)을 돕는 개발 도구이며, UILabs(`@Packages/ui-labs`) 유틸리티를 사용해 일관된 방식으로 작성합니다. 코딩 스타일은 [code-style](../scripting/code-style.md), require 규칙은 [require-style](../scripting/require-style.md), Vide 호출 규칙은 [vide-kit](./vide-kit.md)을 그대로 따릅니다.
+이 문서는 Vide 기반 스토리(Story) 모듈 작성 규칙을 설명합니다. 스토리는 UI 컴포넌트의 샌드박스 렌더링과 상태 조작(Controls)을 돕는 개발 도구이며, UILabs(`@Packages/ui-labs`) 유틸리티를 사용해 일관된 방식으로 작성합니다. 코딩 스타일은 [formatting-style](../../scripting/formatting-style.md), require 규칙은 [require-style](../../scripting/require-style.md), Vide 호출 규칙은 [vide-kit](./vide-kit.md)을 그대로 따릅니다.
 
 
 ## 기본 구조
@@ -86,7 +86,7 @@ return UILabs.CreateVideStory({
 end)
 ```
 
-컴포넌트를 조합 렌더링할 때는 [Vide 호출 스타일](../scripting/code-style.md)의 규칙을 지켜야 합니다. 컴포넌트 함수/변수를 클래스 자리에 전달할 경우 괄호 호출을 사용합니다.
+컴포넌트를 조합 렌더링할 때는 [Vide 호출 스타일](./vide.md#엘리먼트-생성-규칙)의 규칙을 지켜야 합니다. 컴포넌트 함수/변수를 클래스 자리에 전달할 경우 괄호 호출을 사용합니다.
 
 ```lua
 local App = require("@videKit/Components/App")
@@ -119,5 +119,5 @@ end)
 ## 파일 배치와 네이밍
 
 - 컴포넌트 폴더 내 `*.story.luau` 파일로 배치합니다. 예: `Components/Button/Button.story.luau`.
-- Require 순서와 별칭, 빈 줄 규칙은 [require-style](../scripting/require-style.md)을 따릅니다.
-- Vide 호출, 테이블 리터럴/괄호 생략 규칙은 [code-style](../scripting/code-style.md)의 “Vide 호출 스타일”을 따릅니다.
+- Require 순서와 별칭, 빈 줄 규칙은 [require-style](../../scripting/require-style.md)을 따릅니다.
+- Vide 호출, 테이블 리터럴/괄호 생략 규칙은 [vide](../vide.md) 또는 [formatting-style](../../scripting/formatting-style.md)을 따릅니다.

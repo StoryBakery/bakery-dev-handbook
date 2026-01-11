@@ -5,7 +5,7 @@ sidebar_label: Component Design
 
 # Component Design
 
-이 문서는 Vide 기반 UI 컴포넌트를 설계할 때의 의사결정 원칙을 요약합니다. 구현·호출 규칙은 [vide-kit](./vide-kit.md)와 [code-style](../scripting/code-style.md)의 지침을 그대로 따르며, 여기서는 상속과 조합 선택 기준처럼 설계 단계에서 필요한 최소한의 규칙만을 명시합니다.
+이 문서는 Vide 기반 UI 컴포넌트를 설계할 때의 의사결정 원칙을 요약합니다. 구현·호출 규칙은 [vide-kit](./vide-kit.md)와 [scripting-guide](../../scripting/scripting-guide.md)의 지침을 그대로 따르며, 여기서는 상속과 조합 선택 기준처럼 설계 단계에서 필요한 최소한의 규칙만을 명시합니다.
 
 
 ## 상속과 조합의 기준

@@ -1,199 +1,81 @@
 ---
-title: 주석 기반 문서
 sidebar_label: Document Based Comments
 ---
 
-# Document Based Comments
+# Document-Based-Comments
 
-[moonwave](https://github.com/evaera/moonwave) 를 기반으로 주석을 작성합니다.
+## 개요
+Story-Bakery 프로젝트는 [moonwave](https://github.com/evaera/moonwave) 를 사용하여 코드 주석으로부터 API 문서를 자동 생성합니다. Vide 컴포넌트 문서는 [vide-component-documentation](../vide/component-documentation.md) 규칙을 따릅니다.
 
-Vide 기반 UI 컴포넌트를 문서화할 때는 [vide-component-documentation](../vide/component-documentation.md) 가 요구하는 전용 규칙을 추가로 따라야 하며, 해당 문서가 지시하는 대로 클래스 주석 상단에 `@tag vide` 를 선언합니다.
+## 작성-규칙
 
+### 기본-형식
+- 문서화 주석은 반드시 `--[=[ ... ]=]` 블록을 사용합니다.
+- 한 줄 문서 주석(`---`)은 거의 사용하지 않습니다.
+- 공개(Public) API 에만 문서 주석을 작성하며, 내부(Private) 함수나 모듈에는 일반 주석을 사용합니다.
 
-## 작성
+### 자동-추론-원칙
+Moonwave 는 코드를 분석하여 대부분의 정보를 자동으로 추론합니다. 따라서 **추론 가능한 정보에는 태그를 붙이지 않습니다.**
 
+- **함수/메서드**: `function Object:Do()` 선언이 있다면 `@function`, `@method` 태그를 생략합니다.
+- **프로퍼티**: 타입 정의(`type Foo = {}`)나 초기값 할당(`Foo.Bar = 1`)이 있다면 `@prop` 태그를 생략합니다.
+- **타입**: `export type` 선언이 있다면 `@type` 태그를 생략합니다.
 
-### 규칙
+문맥을 추론할 수 없는 경우(예: 주석으로만 존재하는 가상 인터페이스, 런타임에 결정되는 이름)에만 최소한의 태그를 사용합니다.
 
-대부분의 경우에 `--[=[ 문서 주석 ]=]` 을 사용합니다,
-대시 3개로 정의하는 `---` 패턴은 매우 희귀한 케이스인 한줄 문서 주석 경우를 제외하곤 사용하지 않습니다.
+## 작성-순서
 
-`@interface` 의 경우, `.` 으로 내부 키 정의, `@field` 는 사용하지 않습니다
+### 코드-내-위치
+1. **클래스 문서**: 파일 최상단 또는 클래스 정의 바로 위에 작성합니다.
+2. **멤버 문서**: 각 함수, 메서드, 타입 정의 바로 윗줄에 작성합니다.
+3. **다중 클래스**: 한 파일에 여러 클래스가 있다면, 메인 클래스는 최상단, 서브 클래스는 해당 정의 위에 작성합니다.
 
-Moonwave 는 함수/메서드 선언을 직접 읽어 자동으로 정보를 추적합니다.  
-따라서 `function Object:DoSomething()` 혹은 `function Object.new()` 처럼 코드로 명확히 드러나는 경우에는 `@function`, `@method`, `@constructor` 를 적지 않습니다. 문서 주석만 존재하거나, Moonwave 가 문맥을 추적할 수 없는 특별한 경우에만 태그를 추가합니다.  
-`function t.new()` 위에 `@function new @within t` 를 붙이지 않는 것이 기본 규칙입니다. (Moonwave PR #197 내용을 반영)
+### 주석-내부-순서
+주석 블록 내부는 다음 순서로 작성합니다.
 
-내부 모듈/함수처럼 패키지 외부에 공개되지 않는 정의는 API 문서 주석 대신 일반 주석을 사용합니다.
+1. **태그 정의** (`@class`, `@interface` 등 - 추론 불가능할 때만)
+2. **설명 본문** (Description)
+3. **세부 항목**:
+    - `@yield` (함수가 yield 하는 경우)
+    - `@param <name> [type] -- [설명]`
+    - `@return <type> -- [설명]`
+    - `@error <type> -- [설명]`
 
-만일 프로젝트 자체가 단일 패키지라서, 내부 모듈/함수 일지라도 동작 설명이 필요한 경우가 아니라면, 
-이 경우 문서 빌드 대상이 아니므로 Moonwave 주석 태그를 붙이지 않습니다.
+## 예제
 
-- **함수/메서드 타입**: @function/@method 태그가 있어도 선언부에서 매개변수·반환 타입을 추론합니다.  
-  필요하다면 `@param`/`@return` 을 직접 작성해 기본 추론 값을 덮어씁니다.
-- **프로퍼티**: `Foo.Bar = value` 와 같은 대입식에서 `@prop` 과 `@within Foo` 를 추론합니다.  
-  이미 선언된 테이블의 속성도 동일하게 처리하므로, 수동 태그를 추가하지 않습니다.
-- **타입 정의**: `type Foo = { ... }` 또는 함수 타입 표현에서 구조를 추론하여 `@type Foo { ... }` 를 자동 구성합니다.
-
-정리하면 **Moonwave 가 추론할 수 있는 정보에는 태그를 붙이지 않는다** 가 기본 원칙입니다.  
-문맥을 추론할 수 없는 경우(예: 주석으로만 존재하는 설명, 런타임에 조립되는 이름, 타입을 직접 다른 값으로 덮어쓰고 싶을 때) 에만 필요한 최소 태그를 작성합니다.
-
-
-### 순서
-
-코드 내의 순서
-- 맨 위에 블록 주석으로 현재 모듈이 반환하는 객체의 클래스 문서 주석
-- API 를 외부 모듈에 보여주는 정의의 위 줄에 API 문서 주석 작성
-- 현재 모듈이 2개 이상의 클래스를 반환하는 경우:
-  우선순위가 제일 높은 클래스는 스크립트 맨 위의 코드 블록에 작성
-  이후 클래스들은 각자 Constructors Region 위에 문서 주석 작성
-
-표기에서 `< >` 로 감싼 항목은 **모두 필수**이므로 항상 값을 채워 넣습니다.
-`[ ]` 로 감싼 항목은 선택 사항입니다.
-
-문서 주석 내부의 순서:
-차례대로 작성합니다.
-
-- `@class <name>`/`@function <name>`/`@method <name>`/
-`@prop <class.name> <type>`/`@type <name> <type>`/`@interface <name>`
-  (뺄 수 있는 경우 가능한 뺍니다)
-- 특히 `@method`, `@function` 태그는 테이블이나 모듈 내에서 바로 함수 정의가 드러나는 경우(예: `function Object:DoSomething()` 같은 선언)에는 생략합니다. 코드와 주석이 같은 블록에 있으면 Moonwave 가 자동으로 문맥을 추적하므로, 생략이 가능한 순간에는 **무조건** 태그를 추가하지 않습니다.
-- 클래스 나 prop 정의가 아닌 모든 문서 주석의 `@within <class>`
-  (뺄 수 있는 경우 가능한 뺍니다)
-- 줄바꿈
-- 내용 주석
-- 아래 항목을 추가 작성시 줄바꿈
-- `@interface` 의 경우:
-  - 그것의 키와 타입 `.Key <type> -- [내용]`
-- `@function` 의 경우, 문서 주석으로만 정의되었거나, 매개변수와 리턴값 내용을 적어야한다면:
-  - `@yield`
-  - 그것의 `@param <name> [type] -- [내용]`
-  - 그것의 `@return <type> -- [내용]`
-  - `@error <type> -- [description]` 목록들 
-    중요도 와 빈도수가 높을 수록 위로 두며, 목록 작성 시작줄에서 한 줄 줄넘김합니다.
-
-
-
-예시:
 ```lua
 --[=[
     @class Object
-    
-    오브젝트에 대한 설명
+    오브젝트의 기본 클래스입니다.
 ]=]
-
---#region Object
 local Object = {}
-Object.__index = Object
-
---#region Types
-export type Object = setmetatable<{
-    --[=[
-        @prop Object.Name string
-        
-        오브젝트의 이름.
-    ]=]
-    Name: string,
-    
-    --[=[
-        @prop Object.Health number
-        
-        오브젝트의 체력.
-    ]=]
-    Health: number,
-    
-    --[=[
-        @prop Object.Speed number
-        
-        오브젝트의 이동 속도.
-    ]=]
-    Speed: number,
-}, typeof(Object)>
---#endregion Types
-
---#region Constructors
---[=[
-    @interface ObjectParams
-    @within Object
-    
-    오브젝트 생성에 필요한 매개변수
-    
-    .Name string? -- 오브젝트의 이름
-    .Health number -- 오브젝트의 체력
-    .Speed number -- 오브젝트의 이동 속도
-]=]
-export type ObjectParams = {
-    Name: string?,
-    Health: number,
-    Speed: number,
-}
 
 --[=[
     새로운 오브젝트를 생성합니다.
 ]=]
 function Object.new(params: ObjectParams): Object
+    -- ...
 end
---#endregion Constructors
 
---#region Methods
 --[=[
-    오브젝트가 데미지를 입습니다.
+    오브젝트에게 데미지를 입힙니다.
     
-    @param amount number -- 입는 데미지 양
+    @param amount number -- 입힐 데미지 양
+    @return number -- 적용된 실제 데미지
 ]=]
-function Object:TakeDamage(amount: number)
+function Object:TakeDamage(amount: number): number
+    -- ...
 end
-
---[=[
-    오브젝트를 파괴합니다.
-]=]
-function Object:Destroy()    
-end
-
-
-
---#endregion Methods
-
---#region Functions
-
---#endregion Functions
-
---#endregion Object
-
-
-
---#region Subobject
-
---#endregion Subobject
 ```
 
-주석으로만 문서 주석을 작성해야하는 경우:
-- 일반적인 방식으로 클래스를 정의한 경우가 아닌 경우
-- 그 외
+## 어드머니션 (Admonitions)
 
-
-### 어드머니션
+강조하고 싶은 내용은 Docusaurus 스타일의 어드머니션 구문을 사용합니다.
 
 ```lua
 --[=[
-    :::note
-    강조하고 싶은 정보
-    :::
-
-    :::tip
-    유용한 팁
-    :::
-
-    :::info
-    추가 정보나 참고용 내용
-    :::
-
     :::warning
-    주의해야 할 내용
-    :::
-
-    :::danger
-    위험하거나 아주 중요해서 “하지 마세요” 수준의 경고를 적어요.
+    이 메서드는 더 이상 사용되지 않습니다. (Deprecated)
     :::
 ]=]
 ```
