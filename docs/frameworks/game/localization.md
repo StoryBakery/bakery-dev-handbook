@@ -3,7 +3,7 @@ sidebar_label: Localization
 ---
 
 
-# Localization
+## 개요
 
 Story Bakery 에서 어떻게 번역을 다루는지에 대한 문서입니다.
 

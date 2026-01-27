@@ -56,6 +56,7 @@ local MAX_COUNT = 100
 ## 클래스
 
 ### 속성-Property
+
 - **Property**: 내재된 속성.
 - **Attribute**: 커스텀 상수/설정값.
 - **CustomProperty**: 동적으로 추가/제거되는 속성.
