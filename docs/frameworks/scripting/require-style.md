@@ -60,9 +60,16 @@ local GlobalConfig = require("@game/ReplicatedStorage/Shared/Config")
 local GlobalConfig = require(game.ReplicatedStorage.Shared.Config)
 ```
 
-### 상대-경로-../
+### 상대-경로
 - `script.Parent` 참조 대신 `./` 를 사용합니다.
 - 상위로 여러 번 이동할 때는 `../../` 처럼 연결합니다. 부모 폴더를 벗어날 때마다 `/` 를 써줍니다.
+
+
+`./`는 "현재 스크립트의 Parent를 기준점으로 삼아 경로를 해석"한다는 뜻이지, 
+`./` 자체가 "부모"를 의미하는 키워드는 아닙니다, 현재 파일이 있는 디렉토리를 의미하며, 로블록스 로 옮길 때 이것이 `script.Parent` 가 되기 때문입니다
+
+`init.luau` 는 파일의 디렉토리를, 기준으로 삼기 때문에,
+`./` 가 현재 디렉토리 가 아니라 상위 디렉토리가 됩니다
 
 ```lua
 -- Good (Parent):
@@ -71,18 +78,23 @@ local GrandParent = require("../")
 
 -- Good (Sibling):
 local Sibling = require("./Sibling")
-local Cousin = require("../../Uncle/Cousin")
+local Cousin = require("../Uncle/Cousin")
 
 -- Bad:
 local Parent = require(script.Parent)
 ```
 
 ### 자손-경로-@self
-- 현재 모듈의 하위(자식, 자손) 모듈을 불러올 때 사용합니다.
- `@self/` 로만 자손을 가져옵니다.
+
+현재 모듈의 하위(자식, 자손) 모듈을 불러올 때 사용합니다.
+`@self` 는 현재 파일을 기준으로, 경로를 설정합니다, `init.luau` 는 디렉토리가 자신이기 때문에 있는 alias.
 
 ```lua
+-- Good:
 local SubModule = require("@self/SubFolder/Module")
+
+-- Bad:
+local SubModule = require("./MyScript/SubFolder/Module")
 ```
 
 ## 정렬-규칙
