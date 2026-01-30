@@ -71,7 +71,7 @@ local GrandParent = require("../")
 
 -- Good (Sibling):
 local Sibling = require("./Sibling")
-local Cousin = require("../Uncle/Cousin")
+local Cousin = require("../../Uncle/Cousin")
 
 -- Bad:
 local Parent = require(script.Parent)
