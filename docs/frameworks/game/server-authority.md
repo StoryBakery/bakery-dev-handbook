@@ -2,6 +2,6 @@
 sidebar_label: Server Authority
 ---
 
-# Server Authority
+## 개요
 
 
