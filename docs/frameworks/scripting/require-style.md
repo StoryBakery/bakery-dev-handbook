@@ -64,12 +64,39 @@ local GlobalConfig = require(game.ReplicatedStorage.Shared.Config)
 - `script.Parent` 참조 대신 `./` 를 사용합니다.
 - 상위로 여러 번 이동할 때는 `../../` 처럼 연결합니다. 부모 디렉토리를 벗어날 때마다 `/` 를 써줍니다.
 
+#### 문자열-require과-인스턴스-경로-기반
+
+| string-require       | instance-require                         |
+| -------------------- | ---------------------------------------- |
+| `require("./X")`     | `require(script.Parent.X)`               |
+| `require("../X")`    | `require(script.Parent.Parent.X)`        |
+| `require("../../X")` | `require(script.Parent.Parent.Parent.X)` |
+| `require("@self/X")` | `require(script.X)`                      |
+
+#### init.luau
 일반적인 파일에서 `./`는 "내가 들어있는 디렉토리"를 뜻하지만, `init.luau`에서는 의미가 조금 달라집니다. 
-그 이유는 `init.luau` 파일 자체가 곧 그 디렉토리를 대표하는 '본체'가 되기 때문입니다.
+`init.luau` 스크립트는 로블록스 스튜디오에서는 스크립트 안에 스크립트를 넣는다거나, 파일 안에 파일을 넣는 것이 가능하기에
+컴퓨터 os 에서 이를 표현하기 위해선, 폴더를 만들고 아래에  `init.-` 을 넣는다면, 해당 폴더를 `init.-`의 진짜 기준으로 삼게됩니다.
+
+그러므로 `./` 는 `init.luau` 의 상위 디렉토리의 상위 디렉토리가 됩니다.
+
+```
+src
+└── GrandParent
+    ├── Parent
+    │   ├── Sibling.luau
+    │   └── Script
+    │       └── init.client.luau
+    │       └── Child.luau
+    └── Uncle
+        └── Cousin
+            └── init.luau
+```
 
 ```lua
+-- src/GrandParent/Parent/Script/init.client.luau:
 -- Good (Parent):
-local Parent = require("./")
+local Parent = require("./") 
 local GrandParent = require("../")
 
 -- Good (Sibling):
@@ -80,7 +107,10 @@ local Cousin = require("../Uncle/Cousin")
 local Parent = require(script.Parent)
 ```
 
-### 자손-경로-@self
+##### @self
+
+위 `init.luau` 의 특이점때문에, `@self` 란 alias 가 사용됩니다.
+`init.luau` 는 파일 경로 기준이 상위 디렉토리 가 자신의 경로이기 때문에 os 기준으로의 형제이며, 로블록스 스튜디오 기준으로 자식인 모듈에 접근하려면, `./Child` 가 아닌 `@self/Child` 를 해야하기 때문입니다
 
 현재 모듈의 하위(자식, 자손) 모듈을 불러올 때 사용합니다.
 디렉토리가 자기 자신인 `init.luau` 에 쓰입니다.
