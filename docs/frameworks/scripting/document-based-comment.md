@@ -79,11 +79,9 @@ Moonwave 는 함수/메서드 선언을 직접 읽어 자동으로 정보를 추
     오브젝트에 대한 설명
 ]=]
 
---#region Object
 local Object = {}
 Object.__index = Object
 
---#region Types
 export type Object = setmetatable<{
     --[=[
         @prop Object.Name string
@@ -106,9 +104,7 @@ export type Object = setmetatable<{
     ]=]
     Speed: number,
 }, typeof(Object)>
---#endregion Types
 
---#region Constructors
 --[=[
     @interface ObjectParams
     @within Object
@@ -130,9 +126,7 @@ export type ObjectParams = {
 ]=]
 function Object.new(params: ObjectParams): Object
 end
---#endregion Constructors
 
---#region Methods
 --[=[
     오브젝트가 데미지를 입습니다.
     
@@ -149,19 +143,13 @@ end
 
 
 
---#endregion Methods
-
---#region Functions
-
---#endregion Functions
-
---#endregion Object
 
 
 
---#region Subobject
 
---#endregion Subobject
+
+
+
 ```
 
 주석으로만 문서 주석을 작성해야하는 경우:

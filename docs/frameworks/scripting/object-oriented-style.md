@@ -23,7 +23,6 @@ local Class = {}
 Class.__index = Class
 Class.__type = "Class"
 
---#region Constructors
 --[=[
     Class 객체의 새 인스턴스를 생성합니다.
 ]=]
@@ -32,17 +31,12 @@ function Class.new(params: ClassParams?): Class
     -- ...
     return self
 end
---#endregion Constructors
 
---#region Methods
 function Class:Destroy()
 end
---#endregion Methods
 ```
 
 ## 블록-구분-규칙
-
-`--#region` 주석은 `Types`, `Constructors`, `Methods` 처럼 객체지향 구조의 큰 틀을 구분할 때만 사용합니다. 서비스 호출이나 상수 정의 등 일반적인 코드는 빈 줄로 구분합니다.
 
 - **생성자 이름**: 항상 `camelCase` 로 작성합니다. (`Class.new`)
 - **내부 함수**: 생성자나 메서드 내부에서만 사용되는 헬퍼는, 해당 스코프 근처에 두거나 로컬 함수로 분리합니다.
