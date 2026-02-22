@@ -2,6 +2,10 @@
 sidebar_label: Instance Property Style
 ---
 
+## 개요
+
+인스턴스의 속성을 어떻게 사용할지에 대한 문서입니다.
+
 ## Content
 
 로블록스에서는 `-Content` 속성이 추가되기 전엔 `-Id`처럼 `string` 값으로 경로로 어셋 속성을 설정했지만,

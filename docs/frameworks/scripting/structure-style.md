@@ -1,8 +1,3 @@
----
-sidebar_label: Structure Style
----
-
-# Structure-Style
 
 ## 개요
 

@@ -1,8 +1,3 @@
----
-sidebar_label: Formatting Style
----
-
-# Formatting-Style
 
 ## 개요
 

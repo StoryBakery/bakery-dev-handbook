@@ -1,4 +1,5 @@
 ---
+title: Server-Client Replication
 sidebar_label: Replication
 ---
 

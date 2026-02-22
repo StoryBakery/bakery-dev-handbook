@@ -1,8 +1,3 @@
----
-sidebar_label: Syntax Style
----
-
-# Syntax-Style
 
 ## 개요
 

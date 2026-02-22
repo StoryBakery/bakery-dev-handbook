@@ -1,11 +1,4 @@
-﻿---
-id: scripting-guide
-sidebar_label: Scripting Overview
----
-
-# Scripting-Overview
-
-## 개요
+﻿## 개요
 
 Story-Bakery 스크립팅 프레임워크는 그룹 전반의 코드 일관성과 유지보수성을 보장하기 위한 규칙 모음입니다. 모든 개발자는 여기서 정의한 기본 원칙을 토대로 게임 별 요구사항을 확장해야 하며, 새로운 스크립트를 작성하기 전 본 문서를 통해 세부 가이드의 목적을 먼저 파악해야 합니다.
 

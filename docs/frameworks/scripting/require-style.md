@@ -1,8 +1,3 @@
----
-sidebar_label: Require Style
----
-
-# Require-Style
 
 ## 개요
 

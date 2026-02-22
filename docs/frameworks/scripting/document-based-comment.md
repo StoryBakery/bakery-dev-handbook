@@ -1,8 +1,3 @@
----
-title: 주석 기반 문서
-sidebar_label: Document Based Comments
----
-
 ## 개요
 
 [moonwave](https://github.com/evaera/moonwave) 를 기반으로 주석을 작성합니다.

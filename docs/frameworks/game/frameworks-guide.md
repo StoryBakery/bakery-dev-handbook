@@ -1,5 +1,4 @@
 ﻿---
-id: frameworks-guide
 sidebar_label: Frameworks Overview
 ---
 
