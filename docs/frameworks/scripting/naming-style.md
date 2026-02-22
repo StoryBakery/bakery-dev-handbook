@@ -6,18 +6,26 @@
 - **camelCase**: 지역 변수/함수, private 멤버, 생성자 함수.
 - **LOUD_SNAKE_CASE**: 상수.
 
-## 모듈-이름
+## 모듈 이름
 
-- 모듈이 **객체(테이블) 하나**를 반환한다면, 모듈 파일명과 객체명을 **일치**시킵니다.
-- 모듈이 **단일 함수**만 반환하더라도, `PascalCase` 파일명을 사용합니다.
-- 상위 폴더가 맥락을 제공한다면, 파일명에서 중복 접두사를 생략하여 간결하게 유지합니다. (예: `CameraModules/Manager.luau` -> `CameraManager` 로 사용)
+### 객체 반환과 이름 동기화
+모듈이 **객체(테이블) 하나**를 반환한다면, 모듈 파일명과 객체명을 **일치**시킵니다.
+
+#### 단일 함수 반환
+모듈이 **단일 함수**만 반환하더라도, `PascalCase` 파일명을 사용합니다.
+
+### 상위 부모를 통한 축약
+상위 폴더가 맥락을 제공한다면, 파일명에서 중복 접두사를 생략하여 간결하게 유지합니다.
+
+예시:
+- `CameraModules/Manager.luau` -> `CameraManager` 로 사용
 
 ## 변수명
 
 ### 복수형
 문법적으로 어색하더라도 배열/리스트 변수 뒤에는 `s`, `es` 를 붙여 복수임을 명시합니다. (`infos`, `datas`)
 
-### 구분-규칙
+### 구분 규칙
 - **지역 변수**: `camelCase` 가 기본입니다.
 - **PascalCase 변수**: Roblox 서비스, 또는 내부 모듈(`require`)의 반환값을 담을 때 사용합니다.
 - **예외**: 외부 패키지(`@vide` 등)가 소문자 네이밍을 권장한다면, 그에 맞춰 `local vide = require(...)` 처럼 소문자를 사용할 수 있습니다.
@@ -43,20 +51,20 @@ local MAX_COUNT = 100
     - 예: `monsterInfosByMonsterId`
 - **중첩**: `<Item>By<Key1>And<Key2>` 패턴을 사용합니다.
 
-### 집합-Set
+### 집합 Set
 - 값(Value)이 `true` 인 딕셔너리는 집합으로 취급합니다.
 - 변수명 접미사로 `Set` 을 붙입니다. (예: `PlayerSet`)
 
 ## 클래스
 
-### 속성-Property
+### 속성 Property
 
 - **Property**: 내재된 속성.
 - **Attribute**: 커스텀 상수/설정값.
 - **CustomProperty**: 동적으로 추가/제거되는 속성.
 - 한국어 문서에서도 정확한 구분을 위해 영어 원문을 그대로 사용합니다.
 
-### 리소스-식별자
+### 리소스 식별자
 변수가 리소스를 가리킬 때는 접미사로 형태를 명시합니다.
 - `Id`: 숫자 ID (`number`) -> `IMAGE_ID`
 - `Uri`: `rbxassetid://` 문자열 -> `IMAGE_URI`
@@ -73,18 +81,18 @@ local MAX_COUNT = 100
 
 ## 함수명
 
-### 찾기-함수
+### 찾기 함수
 - `Get...`: 대상을 무조건 반환하거나, 없으면 **에러**를 발생시킵니다.
 - `Find...`: 대상을 반환하거나, 없으면 **nil** 을 반환합니다. (Optional)
 
-### From-vs-By
+### From vs By
 - `From`: 복잡한 과정을 거쳐 대상을 추출/변환할 때. (`FindCharacterFromPlayer`)
 - `By`: 딕셔너리 키 조회 등 직접적인 식별자로 찾을 때. (`FindCharacterByPlayer`)
 
 ### 매개변수
 - 선택적 옵션은 `Options`, 필수 설정은 `Params` 접미사를 사용하여 구분합니다.
 
-## 생명주기-메서드
+## 생명주기 메서드
 - `Init`: 초기화.
 - `Configure`: 설정 재구성.
 - `Start`: 실행 시작.
