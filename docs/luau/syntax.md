@@ -1,3 +1,6 @@
+---
+title: Syntax Style
+---
 
 Luau 의 언어적 기능(조건문, 루프, 타입 등)을 안전하고 명확하게 사용하기 위한 가이드입니다.
 
@@ -72,7 +75,7 @@ print(`Bob has {count} apples!`)
 - 잘못된 입력(`Validate-`) 등 명백한 오류는 `error()` 를 호출하여 실행을 중단합니다.
 - 실패 가능성이 있는 로직(`IsAllowed-`)은 `success, result` (또는 `Result` 타입) 패턴을 사용합니다.
 
-### 메세지 형식
+### 메시지 형식
 - 객체 이름이나 중요한 값은 따옴표로 감싸 식별하기 쉽게 만듭니다.
 - `error(\`Invalid property "{property}"\`)`
 

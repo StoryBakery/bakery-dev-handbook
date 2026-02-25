@@ -13,7 +13,7 @@ title: Instance Property Style
 
 ```lua
 e(ImageLabel) ({
- ImageContent = Content.fromAssetId(12345678)
+    ImageContent = Content.fromAssetId(12345678)
 })
 ```
 
@@ -25,6 +25,6 @@ extDecal:SetProperty("ImageContent", Content.fromObject(editableImage))
 
 ### 명명 규칙
 
-[naming-style](./scripting/naming-style.md) 를 따릅니다
+[Naming Style](../luau/naming.md) 를 따릅니다.
 
 Property, Attribute 전부 동일.

@@ -1,0 +1,16 @@
+---
+title: Luau Scripting Guide
+---
+
+Story-Bakery 스크립팅 프레임워크는 그룹 전반의 코드 일관성과 유지보수성을 보장하기 위한 규칙 모음입니다.
+
+스크립팅 가이드군은 파일 구조, 주석 방식, 네이밍, 객체지향 설계, 실행 컨텍스트 관리 등 프로젝트 전반에 적용되는 코딩 습관을 명문화합니다.
+
+## 문서 목록
+
+- [Formatting Style](./formatting.md)
+- [Naming Style](./naming.md)
+- [Require Style](./require.md)
+- [Structure Style](./structure.md)
+- [Syntax Style](./syntax.md)
+- [Object Oriented Style](./object-oriented.md)
