@@ -1,8 +1,6 @@
 ---
-sidebar_label: Instance Property Style
+title: Instance Property Style
 ---
-
-## 개요
 
 인스턴스의 속성을 어떻게 사용할지에 대한 문서입니다.
 
@@ -13,10 +11,9 @@ sidebar_label: Instance Property Style
 
 그러므로 `StoryBakery` 의 게임들은 무조건 `-Content` 속성을 이용합니다.
 
-
 ```lua
 e(ImageLabel) ({
-	ImageContent = Content.fromAssetId(12345678)
+ ImageContent = Content.fromAssetId(12345678)
 })
 ```
 
@@ -27,7 +24,7 @@ extDecal:SetProperty("ImageContent", Content.fromObject(editableImage))
 ## 속성
 
 ### 명명 규칙
+
 [naming-style](./scripting/naming-style.md) 를 따릅니다
 
 Property, Attribute 전부 동일.
-
