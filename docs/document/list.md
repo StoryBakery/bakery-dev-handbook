@@ -83,9 +83,16 @@ Model1
 |- Object1_1
 |- Object1_2
 |- AnotherObject1
+|  |- AnotherDescendant1_1
+|  |  |- Menu
+|  |     |- init.luau
+|  |- AnotherDescendant1_2
+|  |- AnotherDescendant1_3
 |- AnotherObject2
-|  |- AnotherDescendant1
-|  |- AnotherDescendant2
+   |- AnotherDescendant2_1
+   |- AnotherDescendant2_2
+      |- AnotherDescendant2_3
+
 
 Model2
 |- Object2_1

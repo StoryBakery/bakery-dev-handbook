@@ -16,6 +16,7 @@ title: Document Guide
 - [목록 작성 스타일](./list.md)
 - [링크 작성 스타일](./link.md)
 - [코드 작성 스타일](./code.md)
+- [CLI 문서 작성 스타일](./cli.md)
 - [자산 스타일](./asset.md)
 - [네이밍 스타일 가이드](./naming.md)
 - [한국어로 문서를 작성하는 경우](./korean.md)
