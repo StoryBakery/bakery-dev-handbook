@@ -1,0 +1,20 @@
+[*]
+end_of_line = lf
+indent_style = space
+indent_size = 4
+tab_width = 4
+trim_trailing_whitespace = false
+
+[*.md]
+trim_trailing_whitespace = false # Preserve Markdown trailing spaces.
+indent_style = space
+indent_size = 2
+max_line_length = 80
+
+[*.luau]
+indent_style = tab # Use tabs for Luau files - from Roblox Lua Style Guide
+max_line_length = 100
+
+[*.lua]
+indent_style = tab # from luau 
+max_line_length = 100

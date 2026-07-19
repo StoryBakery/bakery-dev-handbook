@@ -1,0 +1,111 @@
+---
+title: agent-documentation-lookup
+---
+
+Use the `http_get` tool to fetch official Roblox documentation as clean markdown.
+
+The tool supports an optional `query` parameter that searches the fetched content for a keyword.
+When a query is provided, only matching sections are returned (or a short "no match" message), saving context window space.
+Misses are cheap — they cost one line in context. Prefer using `query` unless you already know you need the full document.
+
+## Engine API reference
+
+The API name in the URL is PascalCase and matches the Roblox API name exactly.
+
+| Type | URL pattern |
+| --- | --- |
+| Classes | `https://create.roblox.com/docs/reference/engine/classes/<ClassName>.md` |
+| Datatypes | `https://create.roblox.com/docs/reference/engine/datatypes/<TypeName>.md` |
+| Enums | `https://create.roblox.com/docs/reference/engine/enums/<EnumName>.md` |
+| Globals | `https://create.roblox.com/docs/reference/engine/globals/<GlobalName>.md` |
+| Libraries | `https://create.roblox.com/docs/reference/engine/libraries/<LibName>.md` |
+| Engine index | `https://create.roblox.com/docs/reference/engine/llms.txt` |
+| Deprecated APIs | `https://create.roblox.com/docs/reference/engine/deprecated.md` |
+
+The engine index lists classes, datatypes, enums, globals, and libraries with one-line summaries.
+It does NOT list individual methods or properties — search the index for related class/domain terms,
+then fetch the candidate class doc.
+
+## Creator guides
+
+Use creator guides for workflows, requirements, and how-tos that are not spelled out on Engine API pages
+(avatar setup, rigging, character specs, Character Controller Library, etc.).
+
+| Type | URL pattern |
+| --- | --- |
+| Any guide | `https://create.roblox.com/docs/<path>.md` |
+| Site index | `https://create.roblox.com/docs/llms.txt` |
+
+Examples:
+
+```
+http_get(url: "https://create.roblox.com/docs/avatar-setup/auto-setup-requirements.md")
+http_get(url: "https://create.roblox.com/docs/art/characters/specifications.md")
+http_get(url: "https://create.roblox.com/docs/characters/character-controller-library/controllers.md")
+```
+
+When an Engine API page links to a guide (e.g. auto-setup requirements),
+fetch that `.md` URL directly — do not stop at "see requirements" without loading the guide.
+
+Use `query` on large guides the same way as engine API pages.
+
+## Workflow
+
+1. If you KNOW the exact API and need the full reference:
+
+   ```
+   http_get(url: "https://create.roblox.com/docs/reference/engine/classes/Part.md")
+   ```
+
+2. If you need requirements or how-to guidance (avatar setup, rigging, movement controllers):
+
+   ```
+   http_get(url: "https://create.roblox.com/docs/avatar-setup/auto-setup-requirements.md")
+   http_get(url: "https://create.roblox.com/docs/art/characters/specifications.md", query: "higher-fidelity")
+   ```
+
+3. If you need to SEARCH within a page, use the query parameter:
+
+   ```
+   http_get(url: "https://create.roblox.com/docs/reference/engine/classes/Part.md", query: "Anchored")
+   http_get(url: "https://create.roblox.com/docs/reference/engine/classes/BasePart.md", query: "Anchored")
+   ```
+
+   Misses cost almost nothing. If you find a match, fetch the full page with only `url`.
+
+4. For more context around a match without returning the full document:
+
+   ```
+   http_get(url: "...", query: "Anchored", context_lines: 10)
+   ```
+
+5. For the full document when the query matches, without a second call:
+
+   ```
+   http_get(url: "...", query: "Anchored", return_full: true)
+   ```
+
+6. If you don't know which API to look up, use the engine index:
+
+   ```
+   http_get(url: "https://create.roblox.com/docs/reference/engine/llms.txt")
+   ```
+
+7. To discover creator guides by topic, use the site index or search with `query`:
+
+   ```
+   http_get(url: "https://create.roblox.com/docs/llms.txt", query: "avatar-setup")
+   ```
+
+8. If the user references a deprecated API:
+
+   ```
+   http_get(url: "https://create.roblox.com/docs/reference/engine/deprecated.md")
+   ```
+
+## Rules
+
+- URLs must end with `.md` or be `llms.txt`.
+- Do NOT guess API names you are unsure about; use `llms.txt` to confirm first.
+- Prefer `query` when checking multiple pages to save context.
+- Engine API pages often link to creator guides — follow those links with `http_get`.
